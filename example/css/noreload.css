@@ -1,0 +1,105 @@
+.noreload_cover{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.noreload_container{
+    min-width: 100%;
+    min-height: 100%;
+}
+
+/*ANIMATIONS*/
+/*fade*/
+.noreload_cover.fade.loading{
+    animation-name: noreload_fadeIn;
+}
+.noreload_cover.fade.loaded{
+    display: block;
+    background-color: rgba(0,0,0,1);
+    animation-name: noreload_fadeOut;
+}
+@keyframes noreload_fadeIn {
+    0% {display: block; left: 0}
+    1% {background-color: rgba(0,0,0,0);}
+    100% {background-color: rgba(0,0,0,1)}
+}@keyframes noreload_fadeOut {
+    0% {background-color: rgba(0,0,0,1)}
+    99%{background-color: rgba(0,0,0,0);display: block; left: 0}
+    100% {display: none; left: 100%}
+}
+/*left to right*/
+.noreload_cover.left-right.loading{
+    background-color: rgba(0,0,0,1);
+    animation-name: noreload_left-in;
+}
+.noreload_cover.left-right.loaded{
+    background-color: rgba(0,0,0,1);
+    animation-name: noreload_in-right;
+}
+/*top to bottom*/
+.noreload_cover.top-bottom.loading{
+    background-color: rgba(0,0,0,1);
+    animation-name: noreload_top-in;
+}
+.noreload_cover.top-bottom.loaded{
+    background-color: rgba(0,0,0,1);
+    animation-name: noreload_in-bottom;
+}
+/*left to down*/
+.noreload_cover.left-bottom.loading{
+    background-color: rgba(0,0,0,1);
+    animation-name: noreload_left-in;
+}
+.noreload_cover.left-bottom.loaded{
+    background-color: rgba(0,0,0,1);
+    animation-name: noreload_in-bottom;
+}
+
+/*keyframes left*/
+@keyframes noreload_left-in {
+    0% {left: -100%}
+    1% {display: block;}
+    100% {left: 0}
+}
+@keyframes noreload_in-left {
+    0% {left: 0}
+    99% {display: block;left: -100%}
+    100% {display: none;left: -100%}
+}
+/*keyframes right*/
+@keyframes noreload_right-in {
+    0% {left: 100%}
+    1% {display: block;}
+    100% {left: 0}
+}
+@keyframes noreload_in-right {
+     0% {left: 0}
+     99%{display: block; left: 100%}
+     100% {display: none; left: 100%}
+ }
+/*keyframes top*/
+@keyframes noreload_top-in {
+    0% {top: -100%}
+    1% {display: block;}
+    100% {top: 0}
+}
+@keyframes noreload_in-top {
+    0% {top: 0}
+    99% {display: block;top: -100%}
+    100% {display: none;top: -100%}
+}
+/*keyframes bottom*/
+@keyframes noreload_bottom-in {
+    0% {top: 100%}
+    1% {display: block;}
+    100% {top: 0}
+}
+@keyframes noreload_in-bottom {
+     0% {top: 0}
+     99%{display: block; top: 100%}
+     100% {display: none; top: 100%}
+ }
