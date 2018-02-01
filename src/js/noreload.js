@@ -3,8 +3,11 @@
 var noreload_animations = [{name: 'fade', duration: 0.5},
                             {name: 'left-right', duration: 0.9},
                             {name: 'top-bottom', duration: 0.9},
-                            {name: 'left-bottom', duration: 0.9}
+                            {name: 'left-bottom', duration: 1}
                             ];
+// set animation, if left empty you it will ure a random one every time
+//example: var animation = 0;
+var noreload_set_animation;
 
 //REQUIREMENTS
 /*
@@ -25,11 +28,9 @@ echo '</div>';
 
 
 // setup
-var noreload_lastAnimation = noreload_animations[Math.floor(Math.random() * noreload_animations.length)];
-var noreload_cover = document.createElement('div');
-noreload_cover.classList.add('noreload_cover');
-noreload_cover.classList.add(noreload_lastAnimation.name);
-noreload_cover.classList.add('loaded');
+var noreload_lastAnimation = noreload_animations[(noreload_set_animation!=undefined)?noreload_set_animation:Math.floor(Math.random() * noreload_animations.length)];
+
+var noreload_cover;
 var noreload_xhttp = new XMLHttpRequest();
 // setting listeners on <a> tags
 function noreload_setListeners() {
@@ -41,7 +42,7 @@ function noreload_setListeners() {
         var href = hrefs[i];
         var n1 = href.href.indexOf('#');
         var hrefW = n1 != -1 ? href.href.substr(0, n1) : href.href;
-        if (hrefW != currentHref && hrefW.indexOf(document.location.origin) !== -1) {
+        if ((hrefW != currentHref && hrefW.indexOf(document.location.origin) !== -1)||(hrefW == currentHref&&href.href.indexOf('#') == -1)) {
             href.onclick = function (e) {
                 e.preventDefault();
                 noreload_loadPage(e.target.href);
@@ -53,7 +54,7 @@ function noreload_setListeners() {
 // using animation to block view of page while loading
 function noreload_loadPage(url) {
     //select animation
-    var currentAnimation = noreload_animations[Math.floor(Math.random() * noreload_animations.length)];
+    var currentAnimation = noreload_animations[(noreload_set_animation!=undefined)?noreload_set_animation:Math.floor(Math.random() * noreload_animations.length)];
     //setting values to decide wether the side loaded before the animation
     var loadingOver = 0;
     var timeoutOver = 0;
@@ -136,6 +137,13 @@ function noreload_placetags(elements) {
 }
 //add the cover and set the listeners to the <a> tags
 window.addEventListener('load', function (ev) {
-    document.body.appendChild(noreload_cover);
+    noreload_cover = document.getElementsByClassName('noreload_cover')[0];
+    if (noreload_cover==undefined){
+        noreload_cover = document.createElement('div');
+        document.body.appendChild(noreload_cover);
+    }
+    noreload_cover.classList.add('noreload_cover');
+    noreload_cover.classList.add(noreload_lastAnimation.name);
+    noreload_cover.classList.add('loaded');
     noreload_setListeners();
 });

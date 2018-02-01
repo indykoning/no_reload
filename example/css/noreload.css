@@ -7,10 +7,6 @@
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
-.noreload_container{
-    min-width: 100%;
-    min-height: 100%;
-}
 
 /*ANIMATIONS*/
 /*fade*/
